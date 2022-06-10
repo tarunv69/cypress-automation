@@ -1,0 +1,5 @@
+describe("Verifying variables",()=>{
+    it("Website link navigation", ()=>{
+        const webLink =cy.get
+    })
+})
