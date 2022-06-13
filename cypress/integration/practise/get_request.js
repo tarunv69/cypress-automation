@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-import { randEmail, randFullName } from '@ngneat/falso';
+import { randEmail, randFullName, randPassword } from '@ngneat/falso';
 
 
 describe("Test get request", () => {
@@ -13,9 +13,24 @@ describe("Test get request", () => {
 //   })
 
 
-const user = { email: randEmail(), name: randFullName() };
+const user = { email: randEmail(), name: randFullName(), password: randPassword() };
 
 const emails = randEmail({ length: 10 });
+const passwords = randPassword({ length: 1 });
+emails.forEach(email => {
+    passwords.forEach(password => {
+    
+    cy.visit("http://localhost:4200/auth/login")
+    cy.get('[name="email"]').type(email)
+    cy.get('[name="password"]').type(password)
+    cy.get('button[type="submit"]').click()
+    cy.delay
+
+
+})
+})
+
+
 
   cy.fixture('users').as('usersJson') 
     cy.get('@usersJson').then((users) => { 
